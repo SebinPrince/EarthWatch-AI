@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-space: #030712;
+    --bg-panel: rgba(15, 23, 42, 0.78);
+    --border-glass: rgba(56, 189, 248, 0.2);
+    --accent-cyan: #38bdf8;
+    --accent-emerald: #10b981;
+    --accent-amber: #f59e0b;
+    --accent-rose: #f43f5e;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-space);
+    color: #f1f5f9;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    overflow: hidden;
+    user-select: none;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Mission Control Glassmorphism */
+.glass-panel {
+  background: rgba(10, 15, 30, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.glass-panel-subtle {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+  background: rgba(22, 33, 62, 0.65);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(56, 189, 248, 0.12);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background: rgba(30, 41, 75, 0.8);
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
+
+/* Neon indicators */
+.neon-glow-cyan {
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.6), 0 0 20px rgba(56, 189, 248, 0.2);
+}
+
+.neon-glow-rose {
+  box-shadow: 0 0 10px rgba(244, 63, 94, 0.7), 0 0 25px rgba(244, 63, 94, 0.3);
+}
+
+.neon-glow-amber {
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.6), 0 0 20px rgba(245, 158, 11, 0.2);
+}
+
+.neon-glow-emerald {
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.6), 0 0 20px rgba(16, 185, 129, 0.2);
+}
+
+/* Pulsing radar effect */
+@keyframes radar-pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.9;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+.radar-ring {
+  animation: radar-pulse 2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+/* Cesium Widget Overrides for Space Mission Aesthetic */
+.cesium-widget,
+.cesium-widget canvas {
+  width: 100% !important;
+  height: 100% !important;
+  touch-action: none;
+}
+
+.cesium-viewer-bottom {
+  display: none !important;
+}
+
+.cesium-credit-logoContainer,
+.cesium-credit-textContainer,
+.cesium-widget-credits {
+  display: none !important;
+}
+
+/* Custom Sleek Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(3, 7, 18, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.25);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.5);
+}

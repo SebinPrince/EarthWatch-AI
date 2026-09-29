@@ -1,0 +1,64 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+venv/
+.venv/
+backend/venv/
+backend/.venv/
+env/
+ENV/
+
+# Python cache & build
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Environment variables & local secrets
+.env
+backend/.env
+*.env
+*.env.local
+!.env.example
+!backend/.env.example
+
+# SQLite Database
+*.db
+*.sqlite
+*.sqlite3
+backend/database/*.db
+!backend/database/.gitkeep
+
+# Frontend build outputs
+frontend/dist/
+frontend/dist-ssr/
+frontend/*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# IDE & OS files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Debug & Temporary
+.chrome_debug/

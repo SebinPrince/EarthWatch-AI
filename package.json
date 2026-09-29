@@ -1,0 +1,13 @@
+{
+  "name": "earthwatch-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "EarthWatch AI — Global Earth & Disaster Intelligence Platform",
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "preview": "npm --prefix frontend run preview",
+    "backend": "cd backend && .\\venv\\Scripts\\uvicorn.exe app.main:app --host 127.0.0.1 --port 8000 --reload",
+    "start": "node -e \"console.log('Use npm run dev for frontend or npm run backend for backend')\""
+  }
+}
