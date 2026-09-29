@@ -170,6 +170,270 @@ CELESTRAK_TARGETS = [
         "sensor_type": "HDEV, ECOSTRESS, GEDI, Lightning Imaging Sensor",
         "swath_km": 400.0,
         "purpose": "Inhabited research laboratory in low Earth orbit conducting plant water stress thermal imaging (ECOSTRESS) and forest canopy structure measurements (GEDI)."
+    },
+    {
+        "name": "HUBBLE SPACE TELESCOPE",
+        "norad_id": 20580,
+        "group": "science",
+        "mission": "Scientific",
+        "country": "United States / International",
+        "operator": "NASA / ESA",
+        "sensor_type": "WFC3, ACS, STIS, COS (Ultraviolet/Optical/NIR)",
+        "swath_km": 100.0,
+        "purpose": "Deep ultraviolet, optical, and near-infrared astronomy observations above atmospheric optical distortion."
+    },
+    {
+        "name": "TIANGONG (CSS)",
+        "norad_id": 48274,
+        "group": "stations",
+        "mission": "Scientific",
+        "country": "China",
+        "operator": "CMSA",
+        "sensor_type": "Earth Observation & Microgravity Payloads",
+        "swath_km": 350.0,
+        "purpose": "Permanently crewed modular space station conducting microgravity materials science, Earth remote sensing, and atmospheric science experiments."
+    },
+    {
+        "name": "SENTINEL-3A",
+        "norad_id": 41335,
+        "group": "resource",
+        "mission": "Earth Observation",
+        "country": "European Union",
+        "operator": "ESA / EUMETSAT",
+        "sensor_type": "SLSTR (Sea & Land Surface Temp), OLCI (Ocean & Land Color)",
+        "swath_km": 1420.0,
+        "purpose": "Measures sea surface topography, sea and land surface temperature, and ocean/land color for climate and coastal disaster management."
+    },
+    {
+        "name": "SENTINEL-6 MICHAEL FREILICH",
+        "norad_id": 46984,
+        "group": "resource",
+        "mission": "Earth Observation",
+        "country": "United States / European Union",
+        "operator": "NASA / ESA / NOAA / EUMETSAT",
+        "sensor_type": "Poseidon-4 Radar Altimeter, AMR-C",
+        "swath_km": 300.0,
+        "purpose": "Reference mission measuring sea level rise with millimeter precision to predict coastal flooding and extreme storm surges."
+    },
+    {
+        "name": "ALOS-2 (DAICHI-2)",
+        "norad_id": 39766,
+        "group": "resource",
+        "mission": "Disaster monitoring",
+        "country": "Japan",
+        "operator": "JAXA",
+        "sensor_type": "PALSAR-2 (L-band Synthetic Aperture Radar)",
+        "swath_km": 350.0,
+        "purpose": "Features PALSAR-2 L-band SAR radar capable of penetrating thick tropical forest canopies and cloud cover to measure crustal deformation from earthquakes and landslides."
+    },
+    {
+        "name": "EOS-04 (RISAT-1A)",
+        "norad_id": 51656,
+        "group": "resource",
+        "mission": "Disaster monitoring",
+        "country": "India",
+        "operator": "ISRO",
+        "sensor_type": "C-band Synthetic Aperture Radar (SAR)",
+        "swath_km": 240.0,
+        "purpose": "Radar Imaging Satellite providing high-resolution all-weather C-band microwave images for flood hazard zonation, cyclone damage assessment, and agriculture."
+    },
+    {
+        "name": "OCEANSAT-3 (EOS-06)",
+        "norad_id": 54361,
+        "group": "resource",
+        "mission": "Earth Observation",
+        "country": "India",
+        "operator": "ISRO",
+        "sensor_type": "OCM-3 (Ocean Color Monitor), Ku-band Scatterometer",
+        "swath_km": 1400.0,
+        "purpose": "Monitors ocean color, phytoplankton blooms, cyclone sea-surface wind vectors (via scatterometer), and sea surface thermal regimes."
+    },
+    {
+        "name": "METEOSAT-12 (MTG-I1)",
+        "norad_id": 54749,
+        "group": "weather",
+        "mission": "Weather",
+        "country": "European Union",
+        "operator": "EUMETSAT",
+        "sensor_type": "FCI (Flexible Combined Imager), LI (Lightning Imager)",
+        "swath_km": 10000.0,
+        "purpose": "Third-generation geostationary meteorological imager equipped with FCI and Europe's first Lightning Imager (LI) for severe storms."
+    },
+    {
+        "name": "FENGYUN-4B",
+        "norad_id": 48808,
+        "group": "weather",
+        "mission": "Weather",
+        "country": "China",
+        "operator": "CMA (China Meteorological Administration)",
+        "sensor_type": "AGRI (Advanced Geosynchronous Radiation Imager), GIIRS",
+        "swath_km": 10000.0,
+        "purpose": "Advanced geostationary meteorological satellite monitoring typhoon generation, thunderstorms, and dust storms across Asia and the Western Pacific."
+    },
+    {
+        "name": "ELECTRO-L N3",
+        "norad_id": 44891,
+        "group": "weather",
+        "mission": "Weather",
+        "country": "Russia",
+        "operator": "Roscosmos",
+        "sensor_type": "MSU-GS Multispectral Radiometer",
+        "swath_km": 10000.0,
+        "purpose": "Geostationary weather satellite stationed over the Indian Ocean tracking monsoon cloud dynamics, regional hydrology, and heliogeophysical solar activity."
+    },
+    {
+        "name": "GALILEO GSAT0205",
+        "norad_id": 40889,
+        "group": "navigation",
+        "mission": "Navigation",
+        "country": "European Union",
+        "operator": "ESA / EUSPA",
+        "sensor_type": "E1/E5/E6 PNT & SAR Emergency Transponder",
+        "swath_km": 5000.0,
+        "purpose": "Sovereign European Global Navigation Satellite System delivering centimeter-level positioning, atmospheric sounding, and emergency Search and Rescue (SAR) return link services."
+    },
+    {
+        "name": "GLONASS-K1",
+        "norad_id": 45358,
+        "group": "navigation",
+        "mission": "Navigation",
+        "country": "Russia",
+        "operator": "Roscosmos",
+        "sensor_type": "CDMA/FDMA Navigation & COSPAS-SARSAT",
+        "swath_km": 5000.0,
+        "purpose": "Third-generation GLONASS navigation satellite featuring CDMA civilian signals, improved atomic clocks, and disaster SAR relay transponders."
+    },
+    {
+        "name": "BEIDOU-3 M19",
+        "norad_id": 43647,
+        "group": "navigation",
+        "mission": "Navigation",
+        "country": "China",
+        "operator": "CNSA",
+        "sensor_type": "B1C/B2a Navigation & Short-Message Emergency Relay",
+        "swath_km": 5000.0,
+        "purpose": "Global navigation and positioning satellite with inter-satellite cross-links, global short-message emergency disaster communication, and precise point positioning."
+    },
+    {
+        "name": "WORLDVIEW-3",
+        "norad_id": 40115,
+        "group": "resource",
+        "mission": "Earth Observation",
+        "country": "United States",
+        "operator": "Maxar Technologies",
+        "sensor_type": "31cm Panchromatic, 8-band VNIR, 8-band SWIR, CAVIS",
+        "swath_km": 13.1,
+        "purpose": "Commercial super-resolution imaging satellite offering 31cm panchromatic, 8-band VNIR, and 8-band SWIR for infrastructure damage inspection, building collapse, and fire penetration."
+    },
+    {
+        "name": "RADARSAT CONSTELLATION 1",
+        "norad_id": 44324,
+        "group": "resource",
+        "mission": "Disaster monitoring",
+        "country": "Canada",
+        "operator": "Canadian Space Agency (CSA)",
+        "sensor_type": "C-band Synthetic Aperture Radar (SAR)",
+        "swath_km": 350.0,
+        "purpose": "Three-satellite C-band radar constellation offering daily coverage of Canada and global disaster zones for flood delineation, coastal erosion, and Arctic sea-ice navigation."
+    },
+    {
+        "name": "PLANETSCOPE SUPERDOVE",
+        "norad_id": 49450,
+        "group": "resource",
+        "mission": "Earth Observation",
+        "country": "United States",
+        "operator": "Planet Labs",
+        "sensor_type": "PSB.SD (8-band multispectral, 3.7m)",
+        "swath_km": 32.5,
+        "purpose": "High-cadence 8-band multispectral 3.7m resolution Earth imagery scanning every landmass on the planet daily for immediate before-and-after disaster change detection."
+    },
+    {
+        "name": "CAPELLA-8 (WHITNEY)",
+        "norad_id": 52758,
+        "group": "resource",
+        "mission": "Disaster monitoring",
+        "country": "United States",
+        "operator": "Capella Space",
+        "sensor_type": "Sub-meter X-band Synthetic Aperture Radar (SAR)",
+        "swath_km": 20.0,
+        "purpose": "Commercial sub-meter high-resolution X-band Synthetic Aperture Radar (SAR) capable of spotlight imaging through storms and smoke for rapid tactical flood and landslide assessment."
+    },
+    {
+        "name": "ONEWEB-0145",
+        "norad_id": 45131,
+        "group": "communication",
+        "mission": "Communication",
+        "country": "United Kingdom",
+        "operator": "Eutelsat OneWeb",
+        "sensor_type": "Ku/Ka-band Phased Array High-Throughput Transponders",
+        "swath_km": 1050.0,
+        "purpose": "Polar low Earth orbit communication constellation delivering ultra-low-latency high-speed connectivity to humanitarian crisis zones, remote emergency command posts, and maritime vessels."
+    },
+    {
+        "name": "ICEYE-X12",
+        "norad_id": 48866,
+        "group": "resource",
+        "mission": "Disaster monitoring",
+        "country": "Finland",
+        "operator": "ICEYE",
+        "sensor_type": "X-band Micro-Synthetic Aperture Radar (SAR)",
+        "swath_km": 50.0,
+        "purpose": "Pioneering microsatellite SAR constellation delivering near-real-time radar flood extent and building inundation depth measurements within hours of peak rainfall."
+    },
+    {
+        "name": "TANDEM-X",
+        "norad_id": 36605,
+        "group": "resource",
+        "mission": "Earth Observation",
+        "country": "Germany",
+        "operator": "DLR (German Aerospace Center)",
+        "sensor_type": "X-band Radar Interferometer",
+        "swath_km": 100.0,
+        "purpose": "Flies in close formation with TerraSAR-X to capture single-pass X-band radar interferometry, generating sub-meter global digital elevation models (DEM) for flood risk and landslide modeling."
+    },
+    {
+        "name": "CARTOSAT-3",
+        "norad_id": 44804,
+        "group": "resource",
+        "mission": "Earth Observation",
+        "country": "India",
+        "operator": "ISRO",
+        "sensor_type": "Sub-meter Panchromatic (0.28m) & Multispectral",
+        "swath_km": 16.0,
+        "purpose": "Advanced agile sub-meter high resolution Earth observation satellite for urban planning, disaster relief coordination, coastal regulation, and landslide damage mapping."
+    },
+    {
+        "name": "INSAT-3DR",
+        "norad_id": 41752,
+        "group": "weather",
+        "mission": "Weather",
+        "country": "India",
+        "operator": "ISRO",
+        "sensor_type": "Multi-spectral Imager & 19-channel Sounder",
+        "swath_km": 10000.0,
+        "purpose": "Dedicated meteorological satellite in geostationary orbit with multi-spectral imager and 19-channel sounder for Indian Ocean cyclone tracking, rainfall estimation, and sea surface temperature."
+    },
+    {
+        "name": "NAVSTAR GPS III-05",
+        "norad_id": 48859,
+        "group": "navigation",
+        "mission": "Navigation",
+        "country": "United States",
+        "operator": "US Space Force",
+        "sensor_type": "L1C, L2C, L5 Civil Signals & M-Code PNT",
+        "swath_km": 5000.0,
+        "purpose": "Next-generation Global Positioning System satellite providing high-accuracy PNT (Positioning, Navigation, and Timing) and radio occultation atmospheric sounding."
+    },
+    {
+        "name": "STARLINK-30211",
+        "norad_id": 55800,
+        "group": "communication",
+        "mission": "Communication",
+        "country": "United States",
+        "operator": "SpaceX",
+        "sensor_type": "Ku/Ka/E-band Phased Array Laser Inter-satellite Links",
+        "swath_km": 940.0,
+        "purpose": "Low Earth Orbit broadband satellite constellation providing emergency disaster communication, internet recovery, and field team connectivity during infrastructure collapse."
     }
 ]
 
@@ -249,6 +513,126 @@ FALLBACK_TLE_DATA: Dict[int, Tuple[str, str, str]] = {
         "ISS (ZARYA)",
         "1 25544U 98067A   26271.54120982  .00014291  00000+0  25194-3 0  9991",
         "2 25544  51.6421 120.4124 0005120  45.1124 315.0124 15.49821941581294"
+    ),
+    20580: (
+        "HUBBLE SPACE TELESCOPE",
+        "1 20580U 90037B   26271.51249120  .00000850  00000+0  18294-4 0  9992",
+        "2 20580  28.4712 110.5120 0002850  95.4120 264.8120 15.09210941829145"
+    ),
+    48274: (
+        "TIANGONG (CSS)",
+        "1 48274U 21035A   26271.52189410  .00018500  00000+0  22194-3 0  9993",
+        "2 48274  41.4721 145.2091 0004120  68.4124 291.8120 15.61209412859142"
+    ),
+    41335: (
+        "SENTINEL-3A",
+        "1 41335U 16011A   26271.60124812  .00000120  00000+0  35194-4 0  9995",
+        "2 41335  98.6489 341.2189 0001180  90.4124 269.8120 14.39821945129481"
+    ),
+    46984: (
+        "SENTINEL-6 MICHAEL FREILICH",
+        "1 46984U 20086A   26271.58129410  .00000095  00000+0  24194-4 0  9996",
+        "2 46984  66.0412 185.4120 0000950 110.4120 249.8120 12.80912481924185"
+    ),
+    39766: (
+        "ALOS-2 (DAICHI-2)",
+        "1 39766U 14029A   26271.59124891  .00000140  00000+0  39194-4 0  9997",
+        "2 39766  97.9124 338.4120 0001250  88.4120 271.8120 14.78912481294125"
+    ),
+    51656: (
+        "EOS-04 (RISAT-1A)",
+        "1 51656U 22013A   26271.58412954  .00000160  00000+0  42194-4 0  9998",
+        "2 51656  97.5124 340.2189 0001350  92.4120 267.8120 15.12418294129481"
+    ),
+    54361: (
+        "OCEANSAT-3 (EOS-06)",
+        "1 54361U 22158A   26271.59120912  .00000130  00000+0  36194-4 0  9999",
+        "2 54361  98.3120 339.8120 0001150  89.4120 270.8120 14.49821941289145"
+    ),
+    54749: (
+        "METEOSAT-12 (MTG-I1)",
+        "1 54749U 22170A   26271.51294102  .00000010  00000+0  00000+0 0  9991",
+        "2 54749   0.0312  78.4120 0001100 180.4120 179.8120  1.00273891 12941"
+    ),
+    48808: (
+        "FENGYUN-4B",
+        "1 48808U 21047A   26271.52189410  .00000012  00000+0  00000+0 0  9992",
+        "2 48808   0.0512  82.4120 0001150 181.4120 178.8120  1.00273892 24912"
+    ),
+    44891: (
+        "ELECTRO-L N3",
+        "1 44891U 19095A   26271.53412941  .00000011  00000+0  00000+0 0  9993",
+        "2 44891   0.0712  85.4120 0001180 182.4120 177.8120  1.00273893 36192"
+    ),
+    40889: (
+        "GALILEO GSAT0205",
+        "1 40889U 15045A   26271.55419821  .00000015  00000+0  00000+0 0  9994",
+        "2 40889  56.0412 120.4120 0002100 145.4120 214.8120  1.70612941 45192"
+    ),
+    45358: (
+        "GLONASS-K1",
+        "1 45358U 20018A   26271.56410921  .00000018  00000+0  00000+0 0  9995",
+        "2 45358  64.8120 135.4120 0001950 150.4120 209.8120  2.13109412 56192"
+    ),
+    43647: (
+        "BEIDOU-3 M19",
+        "1 43647U 18072A   26271.57124192  .00000016  00000+0  00000+0 0  9996",
+        "2 43647  55.0412 128.4120 0002050 148.4120 211.8120  1.86210941 67192"
+    ),
+    40115: (
+        "WORLDVIEW-3",
+        "1 40115U 14048A   26271.58410291  .00000175  00000+0  48194-4 0  9997",
+        "2 40115  97.9124 340.4120 0001280  91.4120 268.8120 14.84521094 78192"
+    ),
+    44324: (
+        "RADARSAT CONSTELLATION 1",
+        "1 44324U 19033A   26271.59124812  .00000185  00000+0  51194-4 0  9998",
+        "2 44324  97.7412 339.4120 0001320  89.4120 270.8120 14.93821094 89192"
+    ),
+    49450: (
+        "PLANETSCOPE SUPERDOVE",
+        "1 49450U 21006A   26271.60124812  .00000240  00000+0  62194-4 0  9999",
+        "2 49450  97.4120 338.4120 0001450  87.4120 272.8120 15.31821094 90192"
+    ),
+    52758: (
+        "CAPELLA-8 (WHITNEY)",
+        "1 52758U 22060A   26271.60481238  .00000210  00000+0  55194-4 0  9991",
+        "2 52758  97.4120 338.8120 0001400  88.4120 271.8120 15.23821094  1294"
+    ),
+    45131: (
+        "ONEWEB-0145",
+        "1 45131U 20008A   26271.58129410  .00000080  00000+0  21194-4 0  9992",
+        "2 45131  87.9120 170.4120 0001150 105.4120 254.8120 13.20912481  2394"
+    ),
+    48866: (
+        "ICEYE-X12",
+        "1 48866U 21059A   26271.59410921  .00000190  00000+0  52194-4 0  9993",
+        "2 48866  97.7120 339.2120 0001380  89.4120 270.8120 15.00000000  3494"
+    ),
+    36605: (
+        "TANDEM-X",
+        "1 36605U 10030A   26271.58410291  .00000180  00000+0  49194-4 0  9994",
+        "2 36605  97.4120 338.2120 0001350  88.4120 271.8120 15.15821094  4594"
+    ),
+    44804: (
+        "CARTOSAT-3",
+        "1 44804U 19081A   26271.59120912  .00000195  00000+0  53194-4 0  9995",
+        "2 44804  97.5120 339.4120 0001390  90.4120 269.8120 15.22210941  5694"
+    ),
+    41752: (
+        "INSAT-3DR",
+        "1 41752U 16054A   26271.52410291  .00000014  00000+0  00000+0 0  9996",
+        "2 41752   0.0912  88.5412 0001210 182.1124 178.0124  1.00273894  6794"
+    ),
+    48859: (
+        "NAVSTAR GPS III-05",
+        "1 48859U 21054A   26271.54120982  .00000015  00000+0  00000+0 0  9997",
+        "2 48859  55.0124 125.4124 0002120 146.1124 213.0124  2.00547782  7894"
+    ),
+    55800: (
+        "STARLINK-30211",
+        "1 55800U 23028A   26271.60124812  .00002150  00000+0  12194-3 0  9998",
+        "2 55800  53.2120 160.4120 0001450  82.4120 277.8120 15.07821094  8994"
     )
 }
 

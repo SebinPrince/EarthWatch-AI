@@ -30,57 +30,66 @@ router = APIRouter(prefix="/api")
 
 # Seed data helper
 def ensure_db_seeded(db: Session):
-    if db.query(SatelliteModel).count() == 0:
-        now = datetime.now(timezone.utc)
-        for s in SATELLITE_CATALOG:
-            norad = s.get("norad_id")
-            sgp4_pos = celestrak_service.propagate_position(norad, now) if norad else None
+    existing_sat_ids = {row[0] for row in db.query(SatelliteModel.id).all()}
+    now = datetime.now(timezone.utc)
+    new_sats_added = False
 
-            if sgp4_pos:
-                lat = sgp4_pos["latitude"]
-                lon = sgp4_pos["longitude"]
-                alt = sgp4_pos["altitude"]
-                vel = sgp4_pos["velocity"]
-                inc = sgp4_pos["inclination"]
-                period = sgp4_pos["period_minutes"]
-                ecc = sgp4_pos["eccentricity"]
-                l1 = sgp4_pos["tle_line1"]
-                l2 = sgp4_pos["tle_line2"]
-                swath = sgp4_pos["swath_km"]
-                sensor = sgp4_pos["sensor_type"]
-            else:
-                pos = compute_current_satellite_position(s, now)
-                lat, lon = pos["latitude"], pos["longitude"]
-                alt, vel, inc, period, ecc = s.get("altitude"), s.get("velocity"), s.get("inclination"), 95.0, 0.0001
-                l1, l2, swath, sensor = None, None, 250.0, "Multispectral"
+    for s in SATELLITE_CATALOG:
+        if s["id"] in existing_sat_ids:
+            continue
 
-            sat = SatelliteModel(
-                id=s["id"],
-                name=s["name"],
-                norad_id=norad,
-                country=s.get("country"),
-                operator=s.get("operator"),
-                mission=s["mission"],
-                purpose=s.get("purpose"),
-                orbit_type=s.get("orbit_type", "LEO"),
-                altitude=alt,
-                launch_date=s.get("launch_date"),
-                latitude=lat,
-                longitude=lon,
-                velocity=vel,
-                inclination=inc,
-                eccentricity=ecc,
-                period_minutes=period,
-                tle_line1=l1,
-                tle_line2=l2,
-                sensor_type=sensor,
-                swath_km=swath,
-                data_source="CelesTrak (celestrak.org) / NORAD",
-                status=s.get("status", "Active"),
-                is_live=True,
-                last_updated=now
-            )
-            db.add(sat)
+        norad = s.get("norad_id")
+        sgp4_pos = celestrak_service.propagate_position(norad, now) if norad else None
+
+        if sgp4_pos:
+            lat = sgp4_pos["latitude"]
+            lon = sgp4_pos["longitude"]
+            alt = sgp4_pos["altitude"]
+            vel = sgp4_pos["velocity"]
+            inc = sgp4_pos["inclination"]
+            period = sgp4_pos["period_minutes"]
+            ecc = sgp4_pos["eccentricity"]
+            l1 = sgp4_pos["tle_line1"]
+            l2 = sgp4_pos["tle_line2"]
+            swath = sgp4_pos["swath_km"]
+            sensor = sgp4_pos["sensor_type"]
+        else:
+            pos = compute_current_satellite_position(s, now)
+            lat, lon = pos["latitude"], pos["longitude"]
+            alt, vel, inc, period, ecc = s.get("altitude"), s.get("velocity"), s.get("inclination"), s.get("period_minutes", 95.0), 0.0001
+            l1, l2, swath, sensor = None, None, s.get("swath_km", 250.0), s.get("sensor_type", "Multispectral")
+
+        sat = SatelliteModel(
+            id=s["id"],
+            name=s["name"],
+            norad_id=norad,
+            country=s.get("country"),
+            operator=s.get("operator"),
+            mission=s["mission"],
+            purpose=s.get("purpose"),
+            orbit_type=s.get("orbit_type", "LEO"),
+            altitude=alt,
+            launch_date=s.get("launch_date"),
+            latitude=lat,
+            longitude=lon,
+            velocity=vel,
+            inclination=inc,
+            eccentricity=ecc,
+            period_minutes=period,
+            tle_line1=l1,
+            tle_line2=l2,
+            sensor_type=sensor,
+            swath_km=swath,
+            data_source="CelesTrak (celestrak.org) / NORAD",
+            status=s.get("status", "Active"),
+            is_live=True,
+            last_updated=now
+        )
+        db.add(sat)
+        new_sats_added = True
+
+    if new_sats_added:
+        db.commit()
 
     if db.query(DisasterEventModel).count() == 0:
         now = datetime.now(timezone.utc)
