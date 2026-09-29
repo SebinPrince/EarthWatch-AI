@@ -148,6 +148,13 @@ export const GlobeViewer: React.FC<GlobeViewerProps> = ({
       skyAtmosphere: new Cesium.SkyAtmosphere(),
     });
 
+    // Suppress Cesium modal error popups so rendering continues seamlessly
+    if (viewer.cesiumWidget) {
+      (viewer.cesiumWidget as any).showErrorPanel = (title: string, message: string, error: any) => {
+        console.warn('[Cesium Engine Notice]', title, message, error);
+      };
+    }
+
     // World Boundaries and Places Reference Layer (vector-sharp country, state, city names that magnify)
     const labelsLayer = viewer.imageryLayers.addImageryProvider(
       new Cesium.UrlTemplateImageryProvider({
@@ -422,12 +429,39 @@ export const GlobeViewer: React.FC<GlobeViewerProps> = ({
         const radiusMeters = Math.max(30000, Math.sqrt(ev.affected_area_km2 || 500) * 1000);
         const animOffset = (ev.latitude * 100 + ev.longitude * 10) % 2000;
 
+        // Synchronized dynamic radius calculators ensuring semiMajorAxis >= semiMinorAxis at all times
+        let wave1Radius = radiusMeters * 0.15;
+        let lastWave1Update = 0;
+        const getWave1Radius = () => {
+          const now = Date.now();
+          if (now !== lastWave1Update) {
+            lastWave1Update = now;
+            const sec = (now + animOffset) / 1000.0;
+            const progress = (sec % 2.6) / 2.6;
+            wave1Radius = Math.max(100, radiusMeters * (0.15 + 0.85 * progress));
+          }
+          return wave1Radius;
+        };
+
+        let wave2Radius = radiusMeters * 0.15;
+        let lastWave2Update = 0;
+        const getWave2Radius = () => {
+          const now = Date.now();
+          if (now !== lastWave2Update) {
+            lastWave2Update = now;
+            const sec = (now + animOffset + 1300) / 1000.0;
+            const progress = (sec % 2.6) / 2.6;
+            wave2Radius = Math.max(100, radiusMeters * (0.15 + 0.85 * progress));
+          }
+          return wave2Radius;
+        };
+
         // 1. Core Epicenter Impact Disc
         viewer.entities.add({
           position: Cesium.Cartesian3.fromDegrees(ev.longitude, ev.latitude),
           ellipse: {
             semiMajorAxis: radiusMeters * 0.35,
-            semiMinorAxis: radiusMeters * 0.35,
+            semiMinorAxis: radiusMeters * 0.35 * 0.9999,
             material: color.withAlpha(0.28),
             outline: true,
             outlineColor: color,
@@ -439,16 +473,8 @@ export const GlobeViewer: React.FC<GlobeViewerProps> = ({
         viewer.entities.add({
           position: Cesium.Cartesian3.fromDegrees(ev.longitude, ev.latitude),
           ellipse: {
-            semiMajorAxis: new Cesium.CallbackProperty(() => {
-              const sec = (Date.now() + animOffset) / 1000.0;
-              const progress = (sec % 2.6) / 2.6;
-              return radiusMeters * (0.15 + 0.85 * progress);
-            }, false),
-            semiMinorAxis: new Cesium.CallbackProperty(() => {
-              const sec = (Date.now() + animOffset) / 1000.0;
-              const progress = (sec % 2.6) / 2.6;
-              return radiusMeters * (0.15 + 0.85 * progress);
-            }, false),
+            semiMajorAxis: new Cesium.CallbackProperty(() => getWave1Radius(), false),
+            semiMinorAxis: new Cesium.CallbackProperty(() => getWave1Radius() * 0.9999, false),
             material: new Cesium.ColorMaterialProperty(
               new Cesium.CallbackProperty(() => {
                 const sec = (Date.now() + animOffset) / 1000.0;
@@ -472,16 +498,8 @@ export const GlobeViewer: React.FC<GlobeViewerProps> = ({
         viewer.entities.add({
           position: Cesium.Cartesian3.fromDegrees(ev.longitude, ev.latitude),
           ellipse: {
-            semiMajorAxis: new Cesium.CallbackProperty(() => {
-              const sec = (Date.now() + animOffset + 1300) / 1000.0;
-              const progress = (sec % 2.6) / 2.6;
-              return radiusMeters * (0.15 + 0.85 * progress);
-            }, false),
-            semiMinorAxis: new Cesium.CallbackProperty(() => {
-              const sec = (Date.now() + animOffset + 1300) / 1000.0;
-              const progress = (sec % 2.6) / 2.6;
-              return radiusMeters * (0.15 + 0.85 * progress);
-            }, false),
+            semiMajorAxis: new Cesium.CallbackProperty(() => getWave2Radius(), false),
+            semiMinorAxis: new Cesium.CallbackProperty(() => getWave2Radius() * 0.9999, false),
             material: new Cesium.ColorMaterialProperty(
               new Cesium.CallbackProperty(() => {
                 const sec = (Date.now() + animOffset + 1300) / 1000.0;
@@ -573,7 +591,7 @@ export const GlobeViewer: React.FC<GlobeViewerProps> = ({
 
         // When satellite is selected, render its CelesTrak sensor swath footprint and 3D holographic projection cone
         if (isSelected) {
-          const swathRadius = ((sat.swath_km || 250) * 1000) / 2.0;
+          const swathRadius = Math.max(1000, ((sat.swath_km || 250) * 1000) / 2.0);
           const groundCenter = Cesium.Cartesian3.fromDegrees(sat.longitude, sat.latitude, 0);
 
           // 1. Ground swath coverage ellipse
@@ -581,7 +599,7 @@ export const GlobeViewer: React.FC<GlobeViewerProps> = ({
             position: groundCenter,
             ellipse: {
               semiMajorAxis: swathRadius,
-              semiMinorAxis: swathRadius,
+              semiMinorAxis: swathRadius * 0.9999,
               material: Cesium.Color.fromCssColorString('rgba(56, 189, 248, 0.22)'),
               outline: true,
               outlineColor: Cesium.Color.CYAN,
@@ -703,11 +721,12 @@ export const GlobeViewer: React.FC<GlobeViewerProps> = ({
 
       // Ground swath coverage footprint
       const swathKm = selectedSatellite.swath_km || 250;
+      const swathRad = Math.max(1000, (swathKm / 2) * 1000);
       viewer.entities.add({
         position: groundPos,
         ellipse: {
-          semiMajorAxis: (swathKm / 2) * 1000,
-          semiMinorAxis: (swathKm / 2) * 1000,
+          semiMajorAxis: swathRad,
+          semiMinorAxis: swathRad * 0.9999,
           material: Cesium.Color.fromCssColorString('rgba(56, 189, 248, 0.22)'),
           outline: true,
           outlineColor: Cesium.Color.fromCssColorString('#38bdf8'),
@@ -752,13 +771,14 @@ export const GlobeViewer: React.FC<GlobeViewerProps> = ({
         simulationResult.center_longitude,
         simulationResult.center_latitude
       );
+      const simRadius = Math.max(1000, (simulationResult.max_radius_km || 100) * 1000);
 
       // Expanding simulated hazard buffer
       viewer.entities.add({
         position: centerPos,
         ellipse: {
-          semiMajorAxis: simulationResult.max_radius_km * 1000,
-          semiMinorAxis: simulationResult.max_radius_km * 1000,
+          semiMajorAxis: simRadius,
+          semiMinorAxis: simRadius * 0.9999,
           material: Cesium.Color.fromCssColorString('rgba(239, 68, 68, 0.35)'),
           outline: true,
           outlineColor: Cesium.Color.RED,
@@ -831,19 +851,24 @@ export const GlobeViewer: React.FC<GlobeViewerProps> = ({
       });
 
       // Ground animated holographic ripple rings
+      let spotRadius = 110000 * 0.15;
+      let lastSpotUpdate = 0;
+      const getSpotRadius = () => {
+        const now = Date.now();
+        if (now !== lastSpotUpdate) {
+          lastSpotUpdate = now;
+          const sec = now / 1000.0;
+          const progress = (sec % 2.2) / 2.2;
+          spotRadius = Math.max(100, 110000 * (0.15 + 0.85 * progress));
+        }
+        return spotRadius;
+      };
+
       viewer.entities.add({
         position: spotPos,
         ellipse: {
-          semiMajorAxis: new Cesium.CallbackProperty(() => {
-            const sec = Date.now() / 1000.0;
-            const progress = (sec % 2.2) / 2.2;
-            return 110000 * (0.15 + 0.85 * progress);
-          }, false),
-          semiMinorAxis: new Cesium.CallbackProperty(() => {
-            const sec = Date.now() / 1000.0;
-            const progress = (sec % 2.2) / 2.2;
-            return 110000 * (0.15 + 0.85 * progress);
-          }, false),
+          semiMajorAxis: new Cesium.CallbackProperty(() => getSpotRadius(), false),
+          semiMinorAxis: new Cesium.CallbackProperty(() => getSpotRadius() * 0.9999, false),
           material: new Cesium.ColorMaterialProperty(
             new Cesium.CallbackProperty(() => {
               const sec = Date.now() / 1000.0;
